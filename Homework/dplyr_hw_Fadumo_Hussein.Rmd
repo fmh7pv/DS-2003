@@ -1,0 +1,151 @@
+---
+title: "dyplr Homework"
+class: 'DS 2003: Communicating with Data'
+output:
+  html_document:
+    df_print: paged
+---
+---------------
+
+**Objective:** Practice dyplyr skills
+
+**Task:** Follow prompts below. Enter code in code chunks.
+
+**Help:**  [Dplyr Documentation](https://dplyr.tidyverse.org/)
+
+**Submission:** Submit on Canvas. Remember to change file name to include your name as templated. 
+
+**Total points:** 17
+
+---------------
+
+**Question 1 (1 point)**
+Import the `tidverse` package
+```{r}
+#Import packages
+library(tidyverse)
+```
+**Question 2 (1 point)**
+`View()` the built-in dataset `diamonds`
+```{r}
+# Type code
+
+View(diamonds)
+
+# How many columns are in the dataframe?
+#10
+```
+
+**Question 3 (1 point)**
+Check the structure of the dataframe. 
+```{r}
+# Type code
+str(diamonds) 
+
+# What is the most common data type? (consider int & num to be the same data type)
+# numeric 
+```
+**Question 4 (1 point)**
+Subset the dataframe using numerical indices to include the columns `carat`, `clarity`, `color` & `price`
+
+```{r}
+# Type code
+diamonds  %>%
+  select(1, 4, 7) %>%
+  head()
+```
+**Question 5 (1 point)**
+Subset the dataframe using column names the dataframe to include the columns `carat`, `clarity`, & `price`
+```{r}
+# Type code
+diamonds  %>%
+  select(carat, clarity, price) %>%
+  head()
+```
+**Question 6 (1 point)**
+Drop the column `table` from the dataframe.
+```{r}
+# Type code
+diamonds  %>%
+  select(-(table)) %>%
+  head()
+
+```
+**Question 7 (1 point)**
+Select all columns in the dataframe that start with the letter "c". Print the first 5 rows. 
+```{r}
+# Type code
+diamonds%>%
+  select(starts_with("c"))%>%
+  head(5)
+```
+**Question 8 (1 point)**
+What is the primary difference between the functions `select()` & `filter()`?
+```{r}
+# We use the select() function to select columns we want to focus on and the `filter()` function extracts subsets of rows from a data frame.
+```
+
+**Question 9 (1 point)**
+Subset the dataframe to only include observations where `price` is greater than `2000`. Include only the last 5 observations. 
+Hint: Save to a new dataframe
+```{r}
+# Type code 
+diamonds <- diamonds %>%
+  filter(price > 2000)
+  
+diamonds %>%
+  tail(5)
+
+```
+**Question 10 (2 points)**
+How many observations have a price > 10000? What percent of the entire dataframe is that?
+```{r}
+# Observations - use R function
+diamond <- diamonds  %>%
+  filter(price >10000)%>%
+  nrow()
+
+diamond
+  
+```
+
+```{r}
+# Percent - show math with functions you have learned (should be in percent form, not decimal)
+(diamond/nrow(diamonds))*100
+  
+```
+
+**Question 11 (1 point)**
+Sort the `diamonds` dataframe in reverse alphabetical order by `color`
+```{r}
+# Type code
+diamonds %>%
+  arrange(desc(color))%>%
+  head()
+```
+**Question 12 (2 points)**
+What is the average price by diamond cut?
+```{r}
+# Type code
+diamonds %>%
+  group_by(cut)%>%
+  summarize(average_price = mean(price))
+
+```
+
+
+**Question 13 (3 points)**
+Calculate a price x depth variable. Then find the average of your new variable by color.
+```{r}
+# Type code
+
+diamonds %>%
+  mutate(pricexdepth = price * depth) %>%
+  group_by(color) %>%
+  summarise(mean_pxd = mean(pricexdepth, na.rm = TRUE)) -> diamonds1
+
+diamonds1
+# What general trend do you notice?
+# Type answer here
+```
+
