@@ -1,0 +1,127 @@
+---
+title: "HW: tidyr pivots"
+output: html_notebook
+---
+
+---------------
+
+Objective: Practice tidyr pivot skills
+
+Task: Follow prompts below. Enter code in code chunks.
+
+Help: [tidyr Documentation]("https://tidyr.tidyverse.org/")
+
+Submission: Submit on Canvas. Remember to change file name to include your name as templated.
+
+Total points: 16
+
+------------------
+
+**Question 1 (1 point)**   
+Import the `tidyverse` package
+
+```{r}
+# Import libraries
+library(tidyverse)
+```
+
+**Question 2 (1 point)**   
+Load the `example_eagle_pairs.csv`   
+This .csv contains data on the number of observed bald eagle breeding pairs across years and states.
+```{r}
+# Code
+eagles <- read_csv("example_eagle_pairs.csv")
+eagles
+```
+
+**Question 3 (1 point)**   
+Rename column headers to remove `X`
+```{r}
+# Code
+#I went to OH and talked to professor Kupperman about the data set. Once I
+#uploaded the dataset the `X` was already removed from the columns. 
+#I am writing the potential code for the problem if I had `X` . 
+
+
+#eagles <- rename(eagles, `1997` = X1997, `1998` = X1998, `1999` = X1999, `2000` = X2000, `2001` = X2001, `2002` = X2002, `2003` = X2003, `2004` = X2004, `2005` = X2005, `2006` = X2006)
+
+```
+
+**Question 4 (2 points)**  
+List the variables contained in dataset
+```{r}
+# Answer
+str(eagles)
+```
+
+**Question 5 (1 point)**
+In one sentence explain why this data isn't tidy
+
+```{r}
+# Answer
+#There are variables (year and number of nests) that are not in a singular columns
+```
+
+**Question 6 (3 points)**   
+Pivot this dataset longer. 
+```{r}
+# Code
+eagles %>% 
+  pivot_longer(
+    cols = c(`1997`:`2006`), 
+    names_to = "year", 
+    values_to = "num_nests"
+  )
+
+```
+
+**Question 7 (1 point)**   
+Import `example_acs_1.csv`
+
+```{r}
+# Code
+example_acs_1 <- read_csv("example_acs_1.csv")
+View(example_acs_1)
+```
+
+**Question 8 (1 point)**
+This is an example of a dataset that need to pivoted wider in order to be tidy. Which 2 variables are listed as variables but really not?
+
+```{r}
+# Answer
+#GeoID and Variable 
+```
+
+**Question 9 (1 point)**
+How many distinct variables are listed in `variable`? (use dplyr verbs)
+
+```{r}
+# Code
+example_acs_1 %>% distinct(example_acs_1$variable)
+
+# Answer
+# There are 3 listed in `variable`,  pop_housed, pop_renter, median_renter
+```
+
+**Question 10 (1 point)**
+For the distinct values listed in Question 9, in what column are their values currently stored?
+
+```{r}
+# Answer
+#Their values are currently stored in the column 'variable'
+```
+
+**Question 11 (2 points)**
+Use your answers from above to pivot this dataset wider. 
+
+```{r}
+# Code
+example_acs_1 %>% 
+  pivot_wider(
+    names_from = variable,
+    values_from = estimate
+    ) 
+
+```
+
+**1 point: readable, tidyverse code**
