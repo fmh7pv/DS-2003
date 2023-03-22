@@ -25,6 +25,8 @@ library(kableExtra)
 library(cowplot)
 library(datadictionary)
 library(pastecs)
+library(skimr)
+
 ```
 
 # Establishing Data Set
@@ -93,7 +95,7 @@ question1data <- injuries %>%
 question2data <- question1data %>%
   filter(RosterPosition == "Wide Receiver")
 ```
-## Data Dictionary 
+
 ```{r}
 football_info <- tribble(
   ~ name, ~ description,
@@ -125,14 +127,14 @@ This dataset was created by the National Football League (NFL) for a Kaggle-base
 
 # Descriptive Statistics and Exploratory Data Analysis
 ## Descriptive Statistics
-Seen below are a few descriptive statistics for the data necessary for answering question 1. There are six character variables, including RosterPosition, BodyPart, StadiumType, Weather, PlayType and FieldType. Additionally, there are two numeric variables, including temperature and Days_Missed. Temperature is a continuous predictor variable, which can be seen in the Exploratory Data Analysis section, and Days_Missed is the discrete outcome variable that is being analyzed. Some important takeaways from this output are the Min, Median, Mean, and Max of each of the numeric variables. These statistics will play a role in the future narratives.
+Seen below are a few descriptive statistics for the data necessary for answering question 1. There are six character variables, including `RosterPosition`, `BodyPart`, `StadiumType`, `Weather`, `PlayType` and `FieldType`. Additionally, there are two numeric variables, including `Temperature` and `Days_Missed`. `Temperature` is a continuous predictor variable, which can be seen in the Exploratory Data Analysis section, and `Days_Missed` is the discrete outcome variable that is being analyzed. Some important takeaways from this output are the Min, Median, Mean, and Max of each of the numeric variables. These statistics will play a role in the future narratives.
 
 ```{r}
 #Question 1 data (all positions)
 summary(question1data)
 ```
 
-Seen below are a few descriptive statistic for the data necessary for answering question 2. The variables included are the same as for question one, but the only RosterPosition is wide receiver. Once again, some important takeaways from this output are the Min, Median, Mean, and Max of each of the numeric variables. Notice how values vary compared to the question 1 data. For example, the mean Days_Missed for the wide receiver position is 10.93, whereas for all the positions combined it is almost twice as long at 17.96. This may suggest the wide receivers often miss less time when injured compared to some of the other roster positions.
+Seen below are a few descriptive statistic for the data necessary for answering question 2. The variables included are the same as for question one, but the only `RosterPosition` is wide receiver. Once again, some important takeaways from this output are the Min, Median, Mean, and Max of each of the numeric variables. Notice how values vary compared to the question 1 data. For example, the mean Days_Missed for the wide receiver position is 10.93, whereas for all the positions combined it is almost twice as long at 17.96. This may suggest the wide receivers often miss less time when injured compared to some of the other roster positions.
 
 ```{r}
 #Question 2 data (WR only)
