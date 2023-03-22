@@ -90,10 +90,30 @@ injuries <- select(injuries, -c("DM_M1","DM_M7","DM_M28","DM_M42"))
 injuries$Days_Missed <- as.factor(injuries$Days_Missed)
 question1data <- injuries %>%
   select(RosterPosition, BodyPart, StadiumType, Temperature, Weather, PlayType, FieldType, Days_Missed)
-create_dictionary(question1data)
 question2data <- question1data %>%
   filter(RosterPosition == "Wide Receiver")
-create_dictionary(question2data)
+```
+## Data Dictionary 
+```{r}
+football_info <- tribble(
+  ~ name, ~ description,
+  "`RosterPosition`", "Player's postion on the team ",
+  "`BodyPart`", "Injuried part of the body.",
+  "`StadiumType`", "Description of the stadium type",
+  "`Temperature`", "On-field temperature at the start of the game.",
+  "`Weather`", "Weather at the stadium", 
+  "`PlayType`", "Description of the play when the injury was recorded", 
+  "`FieldType`", "Type of field when injury was recorded",
+  "`Days_Missed`", "Number of days missed after an injury")
+
+kable(
+  football_info,
+  format = "html",
+  col.names = c("", "")
+) %>%
+  group_rows(index = c("Data Dictionary")) %>%
+  kable_styling(bootstrap_options = c("hover"))
+
 ```
 
 ## Background
